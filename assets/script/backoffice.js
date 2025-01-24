@@ -83,7 +83,6 @@ form.onsubmit = function (event) {
       } else {
         alertMessage.innerText =
           "Il prodotto " + createdProduct.name + " (" + createdProduct._id + ") " + "è stato aggiunto";
-        productPopup(" è stato modificato");
       }
 
       close.addEventListener("click", () => {

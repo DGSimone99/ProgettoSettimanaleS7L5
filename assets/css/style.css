@@ -3,6 +3,10 @@
   object-fit: cover;
 }
 
+.card {
+  width: 300px;
+}
+
 .home:hover,
 .backoffice:hover {
   font-size: 1.2em;
