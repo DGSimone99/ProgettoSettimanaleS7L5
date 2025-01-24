@@ -35,6 +35,9 @@ window.addEventListener("DOMContentLoaded", () => {
         form.elements.brand.value = product.brand;
         form.elements.imageURL.value = product.imageUrl;
         form.elements.price.value = product.price;
+      })
+      .catch((error) => {
+        console.error("Errore durante il caricamento del prodotto", error);
       });
   } else {
     productBtn.innerText = "Aggiungi Prodotto";
@@ -89,6 +92,13 @@ form.onsubmit = function (event) {
         popup.classList.add("d-none");
         close.classList.add("d-none");
       });
+    })
+    .catch((error) => {
+      if (productId) {
+        console.error("Errore nella modifica del prodotto", error);
+      } else {
+        console.error("Errore nell'aggiunta del prodotto", error);
+      }
     });
 };
 
@@ -130,6 +140,9 @@ function deletePopup() {
         close.addEventListener("click", () => {
           window.location.assign("./index.html");
         });
+      })
+      .catch((error) => {
+        console.error("Errore durante la cancellazione del prodotto", error);
       });
   });
 

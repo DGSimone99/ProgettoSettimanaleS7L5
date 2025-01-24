@@ -40,4 +40,7 @@ fetch("https://striveschool-api.herokuapp.com/api/product/" + productId, {
     container.append(imgDetails, infoDetails);
 
     document.querySelector("title").innerText = product.name;
+  })
+  .catch((error) => {
+    console.error("Errore durante la cancellazione del prodotto", error);
   });

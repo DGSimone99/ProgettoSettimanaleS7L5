@@ -57,6 +57,9 @@ fetch("https://striveschool-api.herokuapp.com/api/product/", {
       productList.appendChild(card);
     });
   })
+  .catch((error) => {
+    console.error("Errore durante la cancellazione del prodotto", error);
+  })
   .finally(() => {
     document.querySelector(".spinner-border").classList.add("d-none");
   });
