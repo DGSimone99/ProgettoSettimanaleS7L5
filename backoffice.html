@@ -108,8 +108,13 @@
       <div
         class="custom-alert z-3 position-fixed top-50 start-50 translate-middle p-5 bg-dark border border-white rounded text-center"
       >
-        <div>Impossibile caricare i prodotti, riprovare più tardi</div>
-        <button id="close" class="btn btn-success add d-none">Chiudi</button>
+        <div class="alert-title fs-4 text-danger py-2"></div>
+        <div class="alert-message"></div>
+        <div class="py-3">
+          <button id="confirmDelete" class="btn btn-danger add d-none mx-2 w-25">Sì</button>
+          <button id="cancelDelete" class="btn btn-success add d-none mx-2 w-25">No</button>
+        </div>
+        <button id="close" class="btn btn-success add d-none mt-3">Chiudi</button>
       </div>
     </section>
 

@@ -9,6 +9,9 @@ let form = document.querySelector("#productForm");
 let productBtn = document.querySelector("#product-btn");
 let productDelete = document.querySelector("#delete-btn");
 
+let popup = document.querySelector(".popup");
+let closeBtn = document.querySelector("#close");
+
 window.addEventListener("DOMContentLoaded", () => {
   if (productId) {
     productBtn.innerText = "Modifica Prodotto";
@@ -105,7 +108,6 @@ resetBtn.addEventListener("click", () => {
 
 //FUNCTIONS
 function showPopup(textTitle, textMessage, x = 0) {
-  let popup = document.querySelector(".popup");
   popup.classList.remove("d-none");
   let alertTitle = document.querySelector(".alert-title");
   let alertMessage = document.querySelector(".alert-message");
@@ -143,7 +145,6 @@ function deletePopup() {
         alertTitle.innerText = "";
         alertMessage.innerText = deletedProduct.name + " (" + deletedProduct._id + ")" + " eliminato con successo.";
 
-        let closeBtn = document.querySelector("#close");
         closeBtn.classList.remove("d-none");
 
         closeBtn.addEventListener("click", () => {
@@ -180,7 +181,6 @@ function resetButton() {
 }
 
 function closePopup() {
-  let closeBtn = document.querySelector("#close");
   closeBtn.classList.remove("d-none");
   closeBtn.addEventListener("click", () => {
     removePopup();
