@@ -10,6 +10,7 @@ let productBtn = document.querySelector("#product-btn");
 let productDelete = document.querySelector("#delete-btn");
 
 let popup = document.querySelector(".popup");
+let closeBtn = document.querySelector("#close");
 
 window.addEventListener("DOMContentLoaded", () => {
   if (productId) {
@@ -38,6 +39,8 @@ window.addEventListener("DOMContentLoaded", () => {
       })
       .catch((error) => {
         console.error("Errore durante il caricamento del prodotto", error);
+        showPopup("Errore", "Impossibile caricare i prodotti");
+        closePopup();
       });
   } else {
     productBtn.innerText = "Aggiungi Prodotto";
@@ -73,9 +76,6 @@ form.onsubmit = function (event) {
     })
     .then((createdProduct) => {
       showPopup("", "", (x = 0));
-      let close = document.querySelector("#close");
-
-      close.classList.remove("d-none");
 
       if (productId) {
         alertMessage.innerText =
@@ -85,15 +85,17 @@ form.onsubmit = function (event) {
           "Il prodotto " + createdProduct.name + " (" + createdProduct._id + ") " + "è stato aggiunto";
       }
 
-      close.addEventListener("click", () => {
-        removePopup();
-      });
+      closePopup();
     })
     .catch((error) => {
       if (productId) {
         console.error("Errore nella modifica del prodotto", error);
+        showPopup("Errore", "Impossibile caricare i prodotti");
+        closePopup();
       } else {
         console.error("Errore nell'aggiunta del prodotto", error);
+        showPopup("Errore", "Impossibile caricare i prodotti");
+        closePopup();
       }
     });
 };
@@ -125,8 +127,6 @@ function showPopup(textTitle, textMessage, x = 0) {
 function deletePopup() {
   showPopup("Attenzione!", "Sei sicuro di voler cancellare il prodotto?", 1);
 
-  let close = document.querySelector("#close");
-
   confirmDelete.addEventListener("click", (event) => {
     event.preventDefault();
     fetch(URL, {
@@ -144,14 +144,18 @@ function deletePopup() {
       .then((deletedProduct) => {
         alertTitle.innerText = "";
         alertMessage.innerText = deletedProduct.name + " (" + deletedProduct._id + ")" + " eliminato con successo.";
-        removePopup();
 
-        close.addEventListener("click", () => {
+        let closeBtn = document.querySelector("#close");
+        closeBtn.classList.remove("d-none");
+
+        closeBtn.addEventListener("click", () => {
           window.location.assign("./index.html");
         });
       })
       .catch((error) => {
         console.error("Errore durante la cancellazione del prodotto", error);
+        showPopup("Errore", "Impossibile caricare i prodotti");
+        closePopup();
       });
   });
 
@@ -177,11 +181,16 @@ function resetButton() {
   });
 }
 
-function removePopup() {
-  let close = document.querySelector("#close");
+function closePopup() {
+  closeBtn.classList.remove("d-none");
+  closeBtn.addEventListener("click", () => {
+    removePopup();
+  });
+}
 
+function removePopup() {
   popup.classList.add("d-none");
-  close.classList.add("d-none");
+  closeBtn.classList.add("d-none");
   confirmDelete.classList.add("d-none");
   cancelDelete.classList.add("d-none");
 }

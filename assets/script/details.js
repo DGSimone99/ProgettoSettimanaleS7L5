@@ -44,3 +44,34 @@ fetch("https://striveschool-api.herokuapp.com/api/product/" + productId, {
   .catch((error) => {
     console.error("Errore durante la cancellazione del prodotto", error);
   });
+
+function showPopup(textTitle, textMessage, x = 0) {
+  popup.classList.remove("d-none");
+  let alertTitle = document.querySelector(".alert-title");
+  let alertMessage = document.querySelector(".alert-message");
+
+  alertTitle.innerText = textTitle;
+  alertMessage.innerText = textMessage;
+
+  if (x === 1) {
+    let confirmDelete = document.querySelector("#confirmDelete");
+    confirmDelete.classList.remove("d-none");
+
+    let cancelDelete = document.querySelector("#cancelDelete");
+    cancelDelete.classList.remove("d-none");
+  }
+}
+
+function closePopup() {
+  closeBtn.classList.remove("d-none");
+  closeBtn.addEventListener("click", () => {
+    removePopup();
+  });
+}
+
+function removePopup() {
+  popup.classList.add("d-none");
+  closeBtn.classList.add("d-none");
+  confirmDelete.classList.add("d-none");
+  cancelDelete.classList.add("d-none");
+}
