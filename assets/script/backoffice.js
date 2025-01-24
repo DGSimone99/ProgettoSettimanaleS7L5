@@ -72,12 +72,9 @@ form.onsubmit = function (event) {
       }
     })
     .then((createdProduct) => {
-      let alertTitle = document.querySelector(".alert-title");
-      let alertMessage = document.querySelector(".alert-message");
+      showPopup("", "", (x = 0));
       let close = document.querySelector("#close");
 
-      alertTitle.innerText = "";
-      popup.classList.remove("d-none");
       close.classList.remove("d-none");
 
       if (productId) {
@@ -89,8 +86,7 @@ form.onsubmit = function (event) {
       }
 
       close.addEventListener("click", () => {
-        popup.classList.add("d-none");
-        close.classList.add("d-none");
+        removePopup();
       });
     })
     .catch((error) => {
@@ -102,18 +98,32 @@ form.onsubmit = function (event) {
     });
 };
 
-function deletePopup() {
+let resetBtn = document.querySelector(".reset");
+
+resetBtn.addEventListener("click", () => {
+  resetButton();
+});
+
+//FUNCTIONS
+function showPopup(textTitle, textMessage, x = 0) {
+  popup.classList.remove("d-none");
   let alertTitle = document.querySelector(".alert-title");
   let alertMessage = document.querySelector(".alert-message");
 
-  alertTitle.innerText = "Attenzione!";
-  alertMessage.innerText = "Sei sicuro di voler eliminare il prodotto?";
+  alertTitle.innerText = textTitle;
+  alertMessage.innerText = textMessage;
 
-  let confirmDelete = document.querySelector("#confirmDelete");
-  confirmDelete.classList.remove("d-none");
+  if (x === 1) {
+    let confirmDelete = document.querySelector("#confirmDelete");
+    confirmDelete.classList.remove("d-none");
 
-  let cancelDelete = document.querySelector("#cancelDelete");
-  cancelDelete.classList.remove("d-none");
+    let cancelDelete = document.querySelector("#cancelDelete");
+    cancelDelete.classList.remove("d-none");
+  }
+}
+
+function deletePopup() {
+  showPopup("Attenzione!", "Sei sicuro di voler cancellare il prodotto?", 1);
 
   let close = document.querySelector("#close");
 
@@ -134,9 +144,7 @@ function deletePopup() {
       .then((deletedProduct) => {
         alertTitle.innerText = "";
         alertMessage.innerText = deletedProduct.name + " (" + deletedProduct._id + ")" + " eliminato con successo.";
-        close.classList.remove("d-none");
-        confirmDelete.classList.add("d-none");
-        cancelDelete.classList.add("d-none");
+        removePopup();
 
         close.addEventListener("click", () => {
           window.location.assign("./index.html");
@@ -150,46 +158,35 @@ function deletePopup() {
   cancelDelete.addEventListener("click", (event) => {
     event.preventDefault();
 
-    popup.classList.add("d-none");
-    close.classList.add("d-none");
-    confirmDelete.classList.add("d-none");
-    cancelDelete.classList.add("d-none");
+    removePopup();
   });
 }
 
-let resetBtn = document.querySelector(".reset");
-
-resetBtn.addEventListener("click", function () {
-  popup.classList.remove("d-none");
-  let alertTitle = document.querySelector(".alert-title");
-  let alertMessage = document.querySelector(".alert-message");
-
-  alertTitle.innerText = "Attenzione!";
-  alertMessage.innerText = "Sei sicuro di voler resettare il form?";
-
-  let confirmDelete = document.querySelector("#confirmDelete");
-  confirmDelete.classList.remove("d-none");
-
-  let cancelDelete = document.querySelector("#cancelDelete");
-  cancelDelete.classList.remove("d-none");
-
-  let close = document.querySelector("#close");
+function resetButton() {
+  showPopup("Attenzione!", "Sei sicuro di voler resettare il form?", 1);
 
   confirmDelete.addEventListener("click", (event) => {
     event.preventDefault();
     form.reset();
-    popup.classList.add("d-none");
-    close.classList.add("d-none");
-    confirmDelete.classList.add("d-none");
-    cancelDelete.classList.add("d-none");
+    removePopup();
   });
 
   cancelDelete.addEventListener("click", (event) => {
     event.preventDefault();
-
-    popup.classList.add("d-none");
-    close.classList.add("d-none");
-    confirmDelete.classList.add("d-none");
-    cancelDelete.classList.add("d-none");
+    removePopup();
   });
-});
+}
+
+function removePopup() {
+  let close = document.querySelector("#close");
+
+  popup.classList.add("d-none");
+  close.classList.add("d-none");
+  confirmDelete.classList.add("d-none");
+  cancelDelete.classList.add("d-none");
+}
+
+/* Ho tentato di raggruppare in funzioni per snellire il codice MA non potevo
+provarlo efficacemente per via del fatto che il server api ha smesso di funzionare, 
+nel caso va bene pure il commit del reset button o quello delle 5 
+(piccoli cambi di style e la richiesta di conferma sul reset sono state le uniche modifiche da allora) */
