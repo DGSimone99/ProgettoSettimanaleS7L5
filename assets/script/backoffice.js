@@ -9,9 +9,6 @@ let form = document.querySelector("#productForm");
 let productBtn = document.querySelector("#product-btn");
 let productDelete = document.querySelector("#delete-btn");
 
-let popup = document.querySelector(".popup");
-let closeBtn = document.querySelector("#close");
-
 window.addEventListener("DOMContentLoaded", () => {
   if (productId) {
     productBtn.innerText = "Modifica Prodotto";
@@ -38,8 +35,8 @@ window.addEventListener("DOMContentLoaded", () => {
         form.elements.price.value = product.price;
       })
       .catch((error) => {
-        console.error("Errore durante il caricamento del prodotto", error);
-        showPopup("Errore", "Impossibile caricare i prodotti");
+        console.error("Errore: Impossibile caricare i prodotti", error);
+        showPopup("Errore", "Impossibile caricare i prodotti. Riprovare più tardi.");
         closePopup();
       });
   } else {
@@ -90,11 +87,11 @@ form.onsubmit = function (event) {
     .catch((error) => {
       if (productId) {
         console.error("Errore nella modifica del prodotto", error);
-        showPopup("Errore", "Impossibile caricare i prodotti");
+        showPopup("Errore", "Impossibile caricare i prodotti. Riprovare più tardi.");
         closePopup();
       } else {
         console.error("Errore nell'aggiunta del prodotto", error);
-        showPopup("Errore", "Impossibile caricare i prodotti");
+        showPopup("Errore", "Impossibile caricare i prodotti. Riprovare più tardi.");
         closePopup();
       }
     });
@@ -108,6 +105,7 @@ resetBtn.addEventListener("click", () => {
 
 //FUNCTIONS
 function showPopup(textTitle, textMessage, x = 0) {
+  let popup = document.querySelector(".popup");
   popup.classList.remove("d-none");
   let alertTitle = document.querySelector(".alert-title");
   let alertMessage = document.querySelector(".alert-message");
@@ -153,8 +151,8 @@ function deletePopup() {
         });
       })
       .catch((error) => {
-        console.error("Errore durante la cancellazione del prodotto", error);
-        showPopup("Errore", "Impossibile caricare i prodotti");
+        console.error("Errore: Impossibile caricare i prodotti", error);
+        showPopup("Errore", "Impossibile caricare i prodotti. Riprovare più tardi.");
         closePopup();
       });
   });
@@ -182,6 +180,7 @@ function resetButton() {
 }
 
 function closePopup() {
+  let closeBtn = document.querySelector("#close");
   closeBtn.classList.remove("d-none");
   closeBtn.addEventListener("click", () => {
     removePopup();

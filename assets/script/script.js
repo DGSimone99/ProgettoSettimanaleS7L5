@@ -58,8 +58,8 @@ fetch("https://striveschool-api.herokuapp.com/api/product/", {
     });
   })
   .catch((error) => {
-    console.error("Errore durante la cancellazione del prodotto", error);
-    showPopup("Errore", "Impossibile caricare i prodotti");
+    console.error("Errore: Impossibile caricare i prodotti", error);
+    showPopup("Errore", "Impossibile caricare i prodotti. Riprovare più tardi.");
     closePopup();
   })
   .finally(() => {
@@ -67,6 +67,7 @@ fetch("https://striveschool-api.herokuapp.com/api/product/", {
   });
 
 function showPopup(textTitle, textMessage, x = 0) {
+  let popup = document.querySelector(".popup");
   popup.classList.remove("d-none");
   let alertTitle = document.querySelector(".alert-title");
   let alertMessage = document.querySelector(".alert-message");
@@ -84,6 +85,7 @@ function showPopup(textTitle, textMessage, x = 0) {
 }
 
 function closePopup() {
+  let closeBtn = document.querySelector("#close");
   closeBtn.classList.remove("d-none");
   closeBtn.addEventListener("click", () => {
     removePopup();
