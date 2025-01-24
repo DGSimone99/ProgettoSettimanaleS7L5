@@ -103,18 +103,19 @@ form.onsubmit = function (event) {
 };
 
 function deletePopup() {
-  popup.classList.remove("d-none");
-  let confirmDelete = document.querySelector("#confirmDelete");
-  confirmDelete.classList.remove("d-none");
-  let cancelDelete = document.querySelector("#cancelDelete");
-  cancelDelete.classList.remove("d-none");
-
-  let close = document.querySelector("#close");
   let alertTitle = document.querySelector(".alert-title");
   let alertMessage = document.querySelector(".alert-message");
 
   alertTitle.innerText = "Attenzione!";
   alertMessage.innerText = "Sei sicuro di voler eliminare il prodotto?";
+
+  let confirmDelete = document.querySelector("#confirmDelete");
+  confirmDelete.classList.remove("d-none");
+
+  let cancelDelete = document.querySelector("#cancelDelete");
+  cancelDelete.classList.remove("d-none");
+
+  let close = document.querySelector("#close");
 
   confirmDelete.addEventListener("click", (event) => {
     event.preventDefault();
@@ -155,3 +156,40 @@ function deletePopup() {
     cancelDelete.classList.add("d-none");
   });
 }
+
+let resetBtn = document.querySelector(".reset");
+
+resetBtn.addEventListener("click", function () {
+  popup.classList.remove("d-none");
+  let alertTitle = document.querySelector(".alert-title");
+  let alertMessage = document.querySelector(".alert-message");
+
+  alertTitle.innerText = "Attenzione!";
+  alertMessage.innerText = "Sei sicuro di voler resettare il form?";
+
+  let confirmDelete = document.querySelector("#confirmDelete");
+  confirmDelete.classList.remove("d-none");
+
+  let cancelDelete = document.querySelector("#cancelDelete");
+  cancelDelete.classList.remove("d-none");
+
+  let close = document.querySelector("#close");
+
+  confirmDelete.addEventListener("click", (event) => {
+    event.preventDefault();
+    form.reset();
+    popup.classList.add("d-none");
+    close.classList.add("d-none");
+    confirmDelete.classList.add("d-none");
+    cancelDelete.classList.add("d-none");
+  });
+
+  cancelDelete.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    popup.classList.add("d-none");
+    close.classList.add("d-none");
+    confirmDelete.classList.add("d-none");
+    cancelDelete.classList.add("d-none");
+  });
+});
