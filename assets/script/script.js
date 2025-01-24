@@ -16,7 +16,7 @@ fetch("https://striveschool-api.herokuapp.com/api/product/", {
       let productList = document.querySelector(".productList");
 
       let card = document.createElement("div");
-      card.classList.add("card", "col-3", "mb-4", "p-0");
+      card.classList.add("card", "col-lg-3", "col-md-4", "col-sm-6", "mb-4", "p-0");
 
       let img = document.createElement("img");
       img.classList.add("card-img-top");
@@ -39,7 +39,7 @@ fetch("https://striveschool-api.herokuapp.com/api/product/", {
       price.innerText = product.price + ",99 €";
 
       let buttons = document.createElement("div");
-      buttons.classList.add("d-flex", "justify-content-between", "my-3");
+      buttons.classList.add("d-flex", "justify-content-between", "mt-3", "buttons");
 
       let modify = document.createElement("a");
       modify.classList.add("btn", "btn-primary");
@@ -47,7 +47,7 @@ fetch("https://striveschool-api.herokuapp.com/api/product/", {
       modify.innerText = "Modifica";
 
       let details = document.createElement("a");
-      details.classList.add("btn");
+      details.classList.add("btn", "btn-link");
       details.href = "details.html?productId=" + product._id;
       details.innerText = "Dettagli";
 

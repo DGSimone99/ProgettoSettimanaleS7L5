@@ -69,19 +69,43 @@ form.onsubmit = function (event) {
       }
     })
     .then((createdProduct) => {
-      if (!productId) {
-        alert("Il prodotto " + createdProduct.name + "(" + createdProduct._id + ")" + " è stato aggiunto.");
+      let alertTitle = document.querySelector(".alert-title");
+      let alertMessage = document.querySelector(".alert-message");
+      let close = document.querySelector("#close");
+
+      alertTitle.innerText = "";
+      popup.classList.remove("d-none");
+      close.classList.remove("d-none");
+
+      if (productId) {
+        alertMessage.innerText =
+          "Il prodotto " + createdProduct.name + "(" + createdProduct._id + ")" + "è stato modificato";
         form.reset();
       } else {
-        alert("Il prodotto " + createdProduct.name + "(" + createdProduct._id + ")" + " è stato modificato.");
+        alertMessage.innerText =
+          "Il prodotto " + createdProduct.name + "(" + createdProduct._id + ")" + "è stato aggiunto";
+        productPopup(" è stato modificato");
       }
+
+      close.addEventListener("click", () => {
+        popup.classList.add("d-none");
+      });
     });
 };
 
 function deletePopup() {
   popup.classList.remove("d-none");
   let confirmDelete = document.querySelector("#confirmDelete");
+  confirmDelete.classList.remove("d-none");
   let cancelDelete = document.querySelector("#cancelDelete");
+  cancelDelete.classList.remove("d-none");
+
+  let close = document.querySelector("#close");
+  let alertTitle = document.querySelector(".alert-title");
+  let alertMessage = document.querySelector(".alert-message");
+
+  alertTitle.innerText = "Attenzione!";
+  alertMessage.innerText = "Sei sicuro di voler eliminare il prodotto?";
 
   confirmDelete.addEventListener("click", (event) => {
     event.preventDefault();
@@ -98,8 +122,15 @@ function deletePopup() {
         }
       })
       .then((deletedProduct) => {
-        alert(deletedProduct.name + " eliminato con successo.");
-        window.location.assign("./index.html");
+        alertTitle.innerText = "";
+        alertMessage.innerText = deletedProduct.name + " (" + deletedProduct._id + ")" + " eliminato con successo.";
+        close.classList.remove("d-none");
+        confirmDelete.classList.add("d-none");
+        cancelDelete.classList.add("d-none");
+
+        close.addEventListener("click", () => {
+          window.location.assign("./index.html");
+        });
       });
   });
 
