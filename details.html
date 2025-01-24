@@ -12,11 +12,11 @@
     />
     <link href="./assets/style/style.css" rel="stylesheet" />
   </head>
-  <body>
+  <body class="bg-dark">
     <header>
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="./index.html">CRUDAZON</a>
+      <nav class="navbar navbar-expand-lg bg-black py-3">
+        <div class="container">
+          <a class="navbar-brand text-white fs-3" href="./index.html">CRUDAZON</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -29,12 +29,12 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+              <li class="nav-item px-4">
+                <a class="nav-link active text-white home fs-3" aria-current="page" href="./index.html">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./backoffice.html">Backoffice</a>
+                <a class="nav-link text-warning backoffice" href="./backoffice.html">Backoffice</a>
               </li>
             </ul>
           </div>
@@ -42,9 +42,21 @@
       </nav>
     </header>
 
-    <main>
-      <div class="container row"></div>
+    <main class="pb-4">
+      <div class="container text-white">
+        <h1 class="productName mt-3">Nome</h1>
+        <div class="details d-flex my-5">
+          <div class="img imgDetails border border-white"></div>
+          <div class="info border border container-fluid p-5 d-flex flex-column justify-content-between"></div>
+        </div>
+      </div>
     </main>
+
+    <footer class="bg-black text-white text-center py-4 mt-5">
+      <div class="container">
+        <p class="fs-3">&copy; CRUDAZON</p>
+      </div>
+    </footer>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

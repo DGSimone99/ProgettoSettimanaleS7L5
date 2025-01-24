@@ -13,18 +13,31 @@ fetch("https://striveschool-api.herokuapp.com/api/product/" + productId, {
     }
   })
   .then((product) => {
-    let container = document.querySelector(".container");
-    container.innerHTML = `
-                    <div class="card col">
-                            <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
-                            <div class="card-body">
-                                <h5 class="card-title">${product.name}</h5>
-                                <p class="card-text">${product.description}</p>
-                                <p class="card-text">${product.price}</p>
-                                <a href="backoffice.html?productId=${product._id}" class="btn btn-primary">Modifica</a>
-                                <a href="details.html?productId=${product._id}" class="btn">Dettagli</a>
-                            </div>
-                        </div>`;
+    let h1 = document.querySelector("h1");
+    h1.innerText = product.name;
+
+    let container = document.querySelector(".details");
+    let imgDetails = document.querySelector(".img");
+    imgDetails.innerHTML = `<img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">`;
+
+    let infoDetails = document.querySelector(".info");
+
+    let description = document.createElement("p");
+    description.innerText = "DESCRIZIONE: " + product.description;
+
+    let price = document.createElement("p");
+    price.innerText = "PREZZO: " + product.price + ",99 €";
+
+    let brand = document.createElement("p");
+    brand.innerText = "BRAND: " + product.brand;
+
+    let modify = document.createElement("a");
+    modify.classList.add("btn", "btn-primary", "py-3");
+    modify.href = "backoffice.html?productId=" + product._id;
+    modify.innerText = "Modifica";
+
+    infoDetails.append(description, price, brand, modify);
+    container.append(imgDetails, infoDetails);
 
     document.querySelector("title").innerText = product.name;
   });
