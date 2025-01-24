@@ -79,16 +79,16 @@ form.onsubmit = function (event) {
 
       if (productId) {
         alertMessage.innerText =
-          "Il prodotto " + createdProduct.name + "(" + createdProduct._id + ")" + "è stato modificato";
-        form.reset();
+          "Il prodotto " + createdProduct.name + " (" + createdProduct._id + ") " + "è stato modificato";
       } else {
         alertMessage.innerText =
-          "Il prodotto " + createdProduct.name + "(" + createdProduct._id + ")" + "è stato aggiunto";
+          "Il prodotto " + createdProduct.name + " (" + createdProduct._id + ") " + "è stato aggiunto";
         productPopup(" è stato modificato");
       }
 
       close.addEventListener("click", () => {
         popup.classList.add("d-none");
+        close.classList.add("d-none");
       });
     });
 };
@@ -136,6 +136,10 @@ function deletePopup() {
 
   cancelDelete.addEventListener("click", (event) => {
     event.preventDefault();
+
     popup.classList.add("d-none");
+    close.classList.add("d-none");
+    confirmDelete.classList.add("d-none");
+    cancelDelete.classList.add("d-none");
   });
 }
