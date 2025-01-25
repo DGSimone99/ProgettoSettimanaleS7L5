@@ -12,6 +12,9 @@ let productDelete = document.querySelector("#delete-btn");
 let popup = document.querySelector(".popup");
 let closeBtn = document.querySelector("#close");
 
+let alertTitle = document.querySelector(".alert-title");
+let alertMessage = document.querySelector(".alert-message");
+
 window.addEventListener("DOMContentLoaded", () => {
   if (productId) {
     productBtn.innerText = "Modifica Prodotto";
@@ -75,7 +78,7 @@ form.onsubmit = function (event) {
       }
     })
     .then((createdProduct) => {
-      showPopup("", "", (x = 0));
+      showPopup("", "");
 
       if (productId) {
         alertMessage.innerText =
@@ -126,6 +129,8 @@ function showPopup(textTitle, textMessage, x = 0) {
 
 function deletePopup() {
   showPopup("Attenzione!", "Sei sicuro di voler cancellare il prodotto?", 1);
+  let alertTitle = document.querySelector(".alert-title");
+  let alertMessage = document.querySelector(".alert-message");
 
   confirmDelete.addEventListener("click", (event) => {
     event.preventDefault();
@@ -142,6 +147,8 @@ function deletePopup() {
         }
       })
       .then((deletedProduct) => {
+        cancelDelete.classList.add("d-none");
+        confirmDelete.classList.add("d-none");
         alertTitle.innerText = "";
         alertMessage.innerText = deletedProduct.name + " (" + deletedProduct._id + ")" + " eliminato con successo.";
 
